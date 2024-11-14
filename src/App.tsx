@@ -1,35 +1,63 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.scss";
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  // const [isLoginPage, setIsLoginPage] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="centered-block">
+      <div className="registration p-5">
+        <form className="reg mb-3">
+          <label htmlFor="email">
+            Email
+            <input
+              id="email"
+              className="input is-primary"
+              type="email"
+              placeholder="example@gmail.com"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+
+          <div>
+            <label htmlFor="password">
+              Password
+              <input
+                id="password"
+                className="input is-primary"
+                type={isPasswordVisible ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+            <div className="registration__pass-block  is-size-7 mt-1">
+              <span>At least 8 characters</span>
+              <label htmlFor="showPass">
+                Show password
+                <input
+                  id="showPass"
+                  type="checkbox"
+                  checked={isPasswordVisible}
+                  onChange={() => setIsPasswordVisible(!isPasswordVisible)}
+                />
+              </label>
+            </div>
+          </div>
+
+          <button className="button is-primary" type="submit">
+            Sign up
+          </button>
+        </form>
+
+        <span>Already have an account ? </span>
+        <a href="#">Log in</a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
-
-export default App;
