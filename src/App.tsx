@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
+import { registration } from "./api/loginAndReg.tsx";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -10,7 +11,14 @@ export default function App() {
   return (
     <div className="centered-block">
       <div className="registration p-5">
-        <form className="reg mb-3">
+        <form
+          className="reg mb-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            registration({ email, password });
+          }}
+        >
           <label htmlFor="email">
             Email
             <input
