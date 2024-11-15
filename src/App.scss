@@ -8,6 +8,10 @@ $navbar-breakpoint: 480px !default;
   font-weight: bold;
 }
 
+.navbar {
+  box-shadow: 0 0 2px 0 #000;
+}
+
 .loader {
   height: 80px;
   width: 80px;
@@ -17,6 +21,9 @@ $navbar-breakpoint: 480px !default;
   height: 100vh;
   width: 100vw;
   display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
   justify-content: center;
   align-items: center;
 }

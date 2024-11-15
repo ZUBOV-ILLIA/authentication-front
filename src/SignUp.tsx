@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./App.scss";
-import { registration } from "./api/loginAndReg.tsx";
+import { registration } from "./api/loginAndReg.ts";
 
-export default function App() {
+export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
