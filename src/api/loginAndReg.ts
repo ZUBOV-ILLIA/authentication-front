@@ -20,13 +20,9 @@ export function registration(data: LogAndRegData) {
 export async function activationUser(token: string) {
   try {
     const res = await axios.get(`${API_URL}/activation/${token}`);
-    if (res.status === 200) {
-      return "User is activated";
-    }
 
-    return "Unexpected response status";
+    return res.status === 200;
   } catch (err) {
     console.error(err);
-    return "An error occurred during activation";
   }
 }

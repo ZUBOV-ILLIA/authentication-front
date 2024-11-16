@@ -5,6 +5,7 @@ import { activationUser } from "../api/loginAndReg.ts";
 export default function UserActivation() {
   const { token } = useParams<{ token: string }>();
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState<null | boolean>(null);
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
@@ -15,8 +16,15 @@ export default function UserActivation() {
     }
 
     const getMessage = async () => {
-      const res = (await activationUser(token)) || "Oops";
-      setMessage(res);
+      const res = await activationUser(token);
+
+      if (res) {
+        setMessage("Your account has been activated");
+        setIsSuccess(true);
+      } else {
+        setMessage("An error occurred during activation");
+        setIsSuccess(false);
+      }
     };
 
     getMessage();
@@ -24,7 +32,17 @@ export default function UserActivation() {
 
   return (
     <div>
-      <div className="centered-block">{message}</div>;
+      <div className="centered-block">
+        {isSuccess !== null && (
+          <div
+            className={`activation-message p-3 has-text-white has-background-${
+              isSuccess ? "primary" : "danger"
+            }`}
+          >
+            {message}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
