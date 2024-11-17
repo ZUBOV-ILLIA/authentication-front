@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.scss";
 import { emailExists, registration } from "./api/loginAndReg.ts";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -17,8 +18,6 @@ export default function SignUp() {
     if (!isEmailValid) return;
 
     const isReg = await registration({ email, password });
-
-    console.log("isReg", isReg);
 
     setIsSuccess(isReg || false);
   }
@@ -38,8 +37,6 @@ export default function SignUp() {
 
     setIsEmailValid(emailIsExist ? false : true);
   }
-
-  console.log(">>>", isSuccess);
 
   return (
     <div className="centered-block">
@@ -105,7 +102,7 @@ export default function SignUp() {
           </form>
 
           <span>Already have an account ? </span>
-          <a href="#">Log in</a>
+          <Link to="/log-in">Log in</Link>
         </div>
       )}
     </div>
