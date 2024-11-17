@@ -18,7 +18,9 @@ export default function SignUp() {
 
     const isReg = await registration({ email, password });
 
-    setIsSuccess(!!isReg);
+    console.log("isReg", isReg);
+
+    setIsSuccess(isReg || false);
   }
 
   async function checkEmail() {
@@ -36,6 +38,8 @@ export default function SignUp() {
 
     setIsEmailValid(emailIsExist ? false : true);
   }
+
+  console.log(">>>", isSuccess);
 
   return (
     <div className="centered-block">
@@ -78,6 +82,7 @@ export default function SignUp() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  minLength={8}
                 />
               </label>
               <div className="registration__pass-block  is-size-7 mt-1">

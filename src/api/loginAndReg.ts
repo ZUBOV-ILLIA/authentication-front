@@ -6,18 +6,14 @@ type LogAndRegData = {
   password: string;
 };
 
-export function registration(data: LogAndRegData) {
+export async function registration(data: LogAndRegData) {
   try {
-    axios
-      .post(`${API_URL}/registration`, {
-        email: data.email,
-        password: data.password,
-      })
-      .then((res) => {
-        if (res.status === 201) {
-          return true;
-        }
-      });
+    const res = await axios.post(`${API_URL}/registration`, {
+      email: data.email,
+      password: data.password,
+    });
+
+    return res.status === 201;
   } catch (err) {
     console.log(err);
     return false;
