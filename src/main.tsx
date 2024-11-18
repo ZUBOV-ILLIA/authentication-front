@@ -9,6 +9,7 @@ import SignUp from "./SignUp.tsx";
 import Layout from "./components/Layout.tsx";
 import UserActivation from "./components/UserActivation.tsx";
 import LogIn from "./LogIn.tsx";
+import Users from "./components/Users.tsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <LogIn />
+      </Layout>
+    ),
+  },
+  {
+    path: "/users",
+    element: (
+      <Layout>
+        <Users />
       </Layout>
     ),
   },

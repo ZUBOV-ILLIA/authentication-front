@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import { logIn } from "./api/loginAndReg.ts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isLogined, setIsLogined] = useState<null | boolean>(null);
+
+  const navigate = useNavigate();
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const isLogIned = await logIn({ email, password });
 
-    console.log(isLogIned);
+    if (isLogIned) {
+      setIsLogined(true);
+      window.localStorage.setItem("accessToken", isLogIned.accessToken);
+    } else {
+      setIsLogined(false);
+    }
   }
+
+  useEffect(() => {
+    if (isLogined === true) {
+      navigate("/users");
+    }
+  }, [isLogined, navigate]);
 
   return (
     <div className="centered-block">
@@ -59,6 +73,12 @@ export default function LogIn() {
               </label>
             </div>
           </div>
+
+          {isLogined === false && (
+            <span className="has-text-danger is-size-7">
+              Try to use another email address
+            </span>
+          )}
 
           <button className="button is-primary" type="submit">
             Log in
