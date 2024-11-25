@@ -16,7 +16,8 @@ export async function registration(data: LogAndRegData) {
     return res.status === 201;
   } catch (err) {
     console.log(err);
-    return false;
+
+    return err;
   }
 }
 

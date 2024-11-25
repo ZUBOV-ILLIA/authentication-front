@@ -19,15 +19,20 @@ export default function SignUp() {
 
     const isReg = await registration({ email, password });
 
-    setIsSuccess(isReg || false);
+    if (typeof isReg === "object") {
+      setIsEmailValid(false);
+      return;
+    }
+
+    setIsSuccess(isReg === true);
   }
 
   async function checkEmail() {
     if (!email) return;
 
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailPattern = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
 
-    if (!emailRegex.test(email)) {
+    if (!emailPattern.test(email)) {
       setIsEmailValid(false);
 
       return;
@@ -54,7 +59,7 @@ export default function SignUp() {
               <input
                 id="email"
                 className="input is-primary"
-                type="email"
+                type="text"
                 placeholder="example@gmail.com"
                 required
                 value={email}
