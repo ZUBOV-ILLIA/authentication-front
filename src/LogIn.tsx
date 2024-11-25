@@ -76,7 +76,7 @@ export default function LogIn() {
 
           {isLogined === false && (
             <span className="has-text-danger is-size-7">
-              Try to use another email address
+              Email or password is incorrect
             </span>
           )}
 
