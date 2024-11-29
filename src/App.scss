@@ -28,6 +28,20 @@ $navbar-breakpoint: 480px !default;
   align-items: center;
 }
 
+.nav {
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &__side {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .registration {
   width: 90%;
 
